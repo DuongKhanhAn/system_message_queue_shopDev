@@ -1,0 +1,21 @@
+{
+  "name": "system_message_queue_shopdev",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "amqplib": "^0.10.9",
+    "dotenv": "^17.2.3",
+    "lodash": "^4.17.23",
+    "mongoose": "^9.1.5"
+  },
+  "devDependencies": {
+    "jest": "^30.2.0"
+  }
+}
