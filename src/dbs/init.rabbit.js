@@ -1,4 +1,5 @@
 'use strict'
+require('dotenv').config()
 const amqp = require('amqplib')
 
 const connectToRabbitMQ = async () => {
