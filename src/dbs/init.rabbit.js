@@ -12,6 +12,7 @@ const connectToRabbitMQ = async () => {
         return {channel, connection}
     } catch (error) {
         console.error('Error connecting to RabbitMQ', error);
+        throw error;
     }
 }
 
@@ -28,12 +29,28 @@ const connectToRabbitMQForTest = async () => {
         // close the connection
         await connection.close()
     } catch (error) {
-        console.log(`Eroor connecting to RabbitMQ`, error);
-        throw error
+        console.error(`Error connecting to RabbitMQ`, error)
+        throw error;
+    }
+}
+
+const consumerQueue = async( channel, queueName ) => {
+    try {
+        await channel.assertQueue( queueName, { durable: true } )
+        console.log(`Waiting for messages...`)
+        channel.consume( queueName, msg => {
+            console.log(`Received message: ${queueName}::`, msg.content.toString());
+        },{
+            noAck: true 
+        })
+    } catch (error) {
+        console.error('Error publish message to rabbitMQ', error)
+        throw error;
     }
 }
 
 module.exports = {
     connectToRabbitMQ,
-    connectToRabbitMQForTest
+    connectToRabbitMQForTest,
+    consumerQueue
 }
